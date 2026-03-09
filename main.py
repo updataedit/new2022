@@ -330,12 +330,12 @@ def build_task_params(env: str, version: str, group: dict) -> dict:
     mapped_env = ENV_MAP.get(env, env)
 
     valid_shop_ids = [
-        item['shopId'] for item in group['items']
-        if item.get('shopId') and item['shopId'] not in ('查询失败', '请求失败')
+        str(item['shopId']) for item in group['items']
+        if item.get('shopId') and str(item['shopId']) not in ('查询失败', '请求失败')
     ]
     original_lines = '\n'.join(
         item['originalLine'] for item in group['items']
-        if item.get('shopId') and item['shopId'] not in ('查询失败', '请求失败')
+        if item.get('shopId') and str(item['shopId']) not in ('查询失败', '请求失败')
     )
 
     has_extra = bool(group.get('extraValues'))
